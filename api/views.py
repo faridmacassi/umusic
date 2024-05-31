@@ -100,7 +100,7 @@ def api(request):
             
             for resultado in resultados_youtube:
                 duracion_youtube = convertir_duracion(resultado['duration'])
-                diferencia = abs(duracion_youtube - music_js_duracion)
+                diferencia = abs(duracion_youtube - int(music_js_duracion))
                 if diferencia < mejor_diferencia:
                     mejor_diferencia = diferencia
                     mejor_coincidencia = resultado
@@ -123,7 +123,7 @@ def api(request):
                 audio_new = MP3(music_path_down, ID3=ID3)
                 audio_new.tags.delall('APIC')
                 if response_img.status_code == 200:
-                    cover_response = response.content
+                    cover_response = response_img.content
                     audio_new.tags.add(
                         APIC(
                             encoding=3,
